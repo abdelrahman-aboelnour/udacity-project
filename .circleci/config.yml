@@ -112,7 +112,7 @@ jobs:
           name: frontend security audit
           command:  |
               cd frontend
-              npm run audit
+              npm audit
 
   scan-backend:
     docker: 
@@ -125,7 +125,7 @@ jobs:
           name: backend security audit
           command:  |
               cd backend
-              npm run audit
+              npm audit
 
   # deploy-infrastructure:
     # docker:
