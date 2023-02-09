@@ -183,9 +183,9 @@ jobs:
             name: Install Ansible
             command: |
                 apk add --update ansible
-      - run:
-          name: Ansible Configure server
-          command: |
+        - run:
+            name: Ansible Configure server
+            command: |
                 cd .circleci/ansible
                 ansible-playbook -i inventory.txt configure-server.yml
             
