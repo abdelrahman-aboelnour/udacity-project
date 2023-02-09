@@ -85,6 +85,7 @@ jobs:
       - run:
           name: frontend test
           command:  |
+              cd frontend
               npm run test
                 
   test-backend:
@@ -95,8 +96,9 @@ jobs:
       - restore_cache:
           keys: [frontend-build]
       - run:
-          name: frontend test
+          name: backend test
           command:  |
+              cd backend
               npm run test
             
   scan-frontend:
@@ -107,8 +109,9 @@ jobs:
       - restore_cache:
           keys: [frontend-build]
       - run:
-          name: frontend test
+          name: frontend security audit
           command:  |
+              cd frontend
               npm run audit
 
   scan-backend:
@@ -119,8 +122,9 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
-          name: frontend test
+          name: backend security audit
           command:  |
+              cd backend
               npm run audit
 
   # deploy-infrastructure:
