@@ -106,11 +106,13 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
+      - restore_cache:
+          keys: [frontend-build]
       - run:
           name: frontend security audit
           command:  |
               cd frontend
-              npm audit
+              npm audit --audit-level=critical
 
   scan-backend:
     docker: 
@@ -121,7 +123,7 @@ jobs:
           name: backend security audit
           command:  |
               cd backend
-              npm audit
+              npm audit --audit-level=critical
 
   # deploy-infrastructure:
     # docker:
