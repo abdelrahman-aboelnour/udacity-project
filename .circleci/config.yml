@@ -20,11 +20,14 @@ commands:
       # Add parameter here     
     steps:
       - run:
+          name: Save curl output to an environment variable
+          command: curl https://kvdb.io/QPHKszVEHMUtnzPfghxuo7/migration_${CIRCLE_WORKFLOW_ID:0:7}
+          env:
+            SUCCESS: "${CIRCLE_JOB_RESULT}"
+      - run:
           name: Revert migrations
           # Add when this will run
           command: |
-            # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            SUCCESS = 1
             if(( $SUCCESS==1 )); 
             then
                cd ~/project/backend
@@ -218,7 +221,6 @@ jobs:
           command: |   
                if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
                then
-                   # If you are using kvdb.io, generate the bucket ID "QPHKszVEHMUtnzPfghxuo7" in your local terminal first
                    curl https://kvdb.io/QPHKszVEHMUtnzPfghxuo7/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
                fi 
       - destroy-environment      
