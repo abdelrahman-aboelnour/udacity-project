@@ -181,7 +181,7 @@ jobs:
                 fingerprints: ["1c:d1:16:fd:c3:8d:83:4f:90:1a:c3:f5:98:a8:7c:65"] 
         - attach_workspace:
             at: ~/
-        - run:
+        - run: 
             name: Install Ansible
             command: |
                 apk add --update ansible
