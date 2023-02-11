@@ -21,9 +21,9 @@ commands:
     steps:
       - run:
           name: Save curl output to an environment variable
-          command: curl https://kvdb.io/QPHKszVEHMUtnzPfghxuo7/migration_${CIRCLE_WORKFLOW_ID:0:7}
-          env:
-            SUCCESS: "${CIRCLE_JOB_RESULT}"
+          command: |
+            SUCCESS=$(curl https://kvdb.io/QPHKszVEHMUtnzPfghxuo7/migration_${CIRCLE_WORKFLOW_ID:0:7})
+            echo "::set-env name=CURL_OUTPUT::$SUCCESS"
       - run:
           name: Revert migrations
           # Add when this will run
