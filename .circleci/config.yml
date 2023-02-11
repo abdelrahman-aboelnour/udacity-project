@@ -232,7 +232,9 @@ jobs:
       - run:
           name: Install Node
           command: |
-            yum install -y nodejs
+            curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
+            sudo yum install -y nodejs
+
       - run:
           name: Install NPM
           command: |
@@ -274,7 +276,8 @@ jobs:
                 apk add --update ansible
                 apk add --update npm
                 apk add --update curl
-                apk add --update aws
+                apk add --update py-pip
+                pip install awscli
         - run:
             name: Print inventory content
             command: |
