@@ -9,7 +9,7 @@
 - name: Extract artifact.tar.gz
   become: yes
   unarchive:
-    src: /artifact.tar.gz
+    src: artifact.tar.gz
     dest: /
 
 - name: Install npm packages
