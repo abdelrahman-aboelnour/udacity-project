@@ -1,8 +1,5 @@
 - name: Install npm packages
   command: npm install
 
-- name: Stop the default PM2 process
-  command: pm2 stop default
-
 - name: Start the application using PM2
   command: pm2 start npm -- start
