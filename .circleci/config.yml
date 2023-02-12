@@ -227,6 +227,7 @@ jobs:
           name: Install Ansible& nodejs & npm & amazon cli
           command: |
             apk update
+            apk upgrade openssl
             apk add ansible
             apk add nodejs
             apk add npm
@@ -245,7 +246,7 @@ jobs:
           command: |
             cd frontend
             npm install
-   #npm run build
+            npm run build
    #tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
    # aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
             
