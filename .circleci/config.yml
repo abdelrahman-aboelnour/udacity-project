@@ -221,20 +221,16 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli:latest
+      - image: python:3.12.0a4-alpine3.17
     steps:
       - checkout
       - run:
-          name: Install Python
+          name: Install Ansible& nodejs & npm & amazon cli
           command: |
-            yum install -y python3
-            yum install -y curl
-      - run:
-          name: Install nodejs & npm
-          command: |
-            curl -sL https://rpm.nodesource.com/setup_current.x | bash -
-            yum install -y nodejs
-            yum install -y npm
+            apk update
+            apk add ansible
+            apk add nodejs
+            apk add aws-cli
       - run:
           name: Get backend url
           command: |
