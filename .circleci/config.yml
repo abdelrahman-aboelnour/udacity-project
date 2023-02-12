@@ -227,9 +227,8 @@ jobs:
           name: Install Ansible& nodejs & npm & amazon cli
           command: |
             apk update
-            apk upgrade openssl
             apk add ansible
-            apk add nodejs
+            apk add nodejs==16.3.0
             apk add npm
             apk add aws-cli
       - run:
