@@ -230,6 +230,7 @@ jobs:
             apk update
             apk add ansible
             apk add nodejs
+            apk add npm
             apk add aws-cli
       - run:
           name: Get backend url
