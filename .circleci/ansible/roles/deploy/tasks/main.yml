@@ -1,17 +1,10 @@
-- name: List directory contents
-  shell: ls -l
-  register: ls_result
-
-- name: Display result
-  debug:
-    var: ls_result.stdout_lines
 
 - name: Extract artifact.tar.gz
   become: yes
   unarchive:
-    src: artifact.tar.gz
+    src: /artifact.tar.gz
     dest: /
-
+    remote_src: yes
 - name: Install npm packages
   command: npm install
 
