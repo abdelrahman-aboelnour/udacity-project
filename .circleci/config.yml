@@ -220,7 +220,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: python:3.12.0a4-alpine3.17
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - run:
@@ -228,9 +228,10 @@ jobs:
           command: |
             apk update
             apk add ansible
-            apk add nodejs==16.3.0
+            apk add nodejs
             apk add npm
             apk add aws-cli
+            apk del nodejs
       - run:
           name: Get backend url
           command: |
