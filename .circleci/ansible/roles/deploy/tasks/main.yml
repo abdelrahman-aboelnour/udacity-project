@@ -4,7 +4,6 @@
   unarchive:
     src: /dppackage/artifact.tar.gz
     dest: /
-    remote_src: yes
     
 
 - name: Install npm packages
