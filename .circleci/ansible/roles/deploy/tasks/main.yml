@@ -1,3 +1,10 @@
+- name: Extract artifact.tar.gz
+  become: yes
+  unarchive:
+    src: artifact.tar.gz
+    dest: /
+    remote_src: yes
+
 - name: Install npm packages
   command: npm install
 
