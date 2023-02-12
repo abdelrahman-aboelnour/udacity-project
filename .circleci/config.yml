@@ -226,12 +226,10 @@ jobs:
       - run:
           name: Install Ansible& nodejs & npm & amazon cli
           command: |
-            apk update
-            apk add ansible
-            apk add nodejs
-            apk add npm
-            apk add aws-cli
-            apk del nodejs
+            apt-get install ansible
+            apt-get install nodejs
+            apt-get install npm
+            apt-get install aws-cli
       - run:
           name: Get backend url
           command: |
