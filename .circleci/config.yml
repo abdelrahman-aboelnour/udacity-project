@@ -221,7 +221,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli
+      - image: amazon/aws-cli:latest
     steps:
       - checkout
       - run:
@@ -232,7 +232,7 @@ jobs:
       - run:
           name: Install nodejs & npm
           command: |
-            curl -sL https://rpm.nodesource.com/setup_16.x | bash -
+            curl -sL https://rpm.nodesource.com/setup_current.x | bash -
             yum install -y nodejs
             yum install -y npm
       - run:
