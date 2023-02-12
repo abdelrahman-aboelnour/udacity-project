@@ -2,7 +2,7 @@
 - name: Extract artifact.tar.gz
   become: yes
   unarchive:
-    src: /dppackage/artifact.tar.gz
+    src: ./dppackage/artifact.tar.gz
     dest: /
     
 
