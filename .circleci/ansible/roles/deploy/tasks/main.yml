@@ -1,6 +1,5 @@
 
 - name: Extract artifact.tar.gz
-  become: yes
   unarchive:
     src: /root/project/artifact.tar.gz
     dest: /home/ubuntu/
