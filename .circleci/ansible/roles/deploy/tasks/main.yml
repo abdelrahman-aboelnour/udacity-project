@@ -3,9 +3,6 @@
   unarchive:
     src: /root/project/artifact.tar.gz
     dest: /home/ubuntu/
-    
-- name: Install npm packages
-  command: npm install
 
 - name: stop app.
   become: true
@@ -13,4 +10,7 @@
   ignore_errors: yes
   
 - name: Start the application using PM2
-  command: pm2 start npm -- start
+  become: true
+  shell: |
+    npm install
+    pm2 start npm -- start
