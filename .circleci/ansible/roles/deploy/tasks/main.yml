@@ -2,12 +2,16 @@
 - name: Extract artifact.tar.gz
   become: yes
   unarchive:
-    src: artifact.tar.gz
-    dest: /
+    src: /root/project/artifact.tar.gz
+    dest: /home/ubuntu/
     
-
 - name: Install npm packages
   command: npm install
 
+- name: stop app.
+  become: true
+  shell: pm2 stop default
+  ignore_errors: yes
+  
 - name: Start the application using PM2
   command: pm2 start npm -- start
