@@ -9,8 +9,8 @@
   shell: pm2 stop default
   ignore_errors: yes
   
-# - name: Start the application using PM2
-  # become: true
-  # shell: |
-    # npm install
-    # pm2 start npm -- start
+- name: Start the application using PM2
+  become: true
+  shell: |
+    npm install
+    pm2 start npm -- start
