@@ -12,5 +12,5 @@
 - name: Start the application using PM2
   become: true
   shell: |
-    cd /dist
+    cd ./dist
     pm2 start main.js
