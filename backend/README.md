@@ -146,13 +146,14 @@ You need to add some environment variables to your system in order to run migrat
 
 ```
 TYPEORM_CONNECTION=postgres
-TYPEORM_HOST=localhost
+TYPEORM_HOST=database-2.cnskowxsuv5q.us-east-1.rds.amazonaws.com
 TYPEORM_PORT=5432
 TYPEORM_USERNAME=postgres
-TYPEORM_PASSWORD=password
-TYPEORM_DATABASE=glee2
-TYPEORM_MIGRATIONS=./src/migrations/*.ts
-TYPEORM_ENTITIES=./src/modules/**/*.entity.ts
+TYPEORM_PASSWORD=mypassword
+TYPEORM_DATABASE=postgres
+TYPEORM_MIGRATIONS=./migrations/*.ts
+TYPEORM_ENTITIES=./modules/**/*.entity.ts
+TYPEORM_MIGRATIONS_DIR=./migrations
 ```
 
 ## Migrations for CI/CD Review Apps
