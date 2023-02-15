@@ -291,7 +291,7 @@ jobs:
                 export TYPEORM_MIGRATIONS_DIR=./migrations
                 export TYPEORM_ENTITIES=./modules/domain/**/*.entity.{ts,.js}
                 export TYPEORM_MIGRATIONS=./migrations/*.ts
-                export TYPEORM_HOST=$ORM_HOST
+                export TYPEORM_HOST=$TYPEORM_HOST
                 export TYPEORM_PORT=$TYPEORM_PORT
                 export TYPEORM_USERNAME=$TYPEORM_USERNAME
                 export TYPEORM_PASSWORD=$TYPEORM_PASSWORD
@@ -331,15 +331,15 @@ jobs:
           name: Get backend url
           command: |
             # your code here
-            export BACKEND_IP=$(aws ec2 describe-instances --filters "Name=tag:project,Values=udapeople" --filters "Name=instance-state-name,Values=running,pending" --query "Reservations[*].Instances[*].[PublicIpAddress]" --output text)
-            export API_URL="http://${BACKEND_IP}:3030"
+            BACKEND_IP=$(aws ec2 describe-instances --filters "Name=tag:project,Values=udapeople" --filters "Name=instance-state-name,Values=running,pending" --query "Reservations[*].Instances[*].[PublicIpAddress]" --output text)
+            export API_URL=http://${BACKEND_IP}:3030
             echo "API_URL = ${API_URL}"
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
       - run:
           name: Backend smoke test.
           command: |
-            export BACKEND_IP=$(aws ec2 describe-instances --filters "Name=tag:project,Values=udapeople" --filters "Name=instance-state-name,Values=running,pending" --query "Reservations[*].Instances[*].[PublicIpAddress]" --output text)
-            export API_URL="http://${BACKEND_IP}:3030"
+            BACKEND_IP=$(aws ec2 describe-instances --filters "Name=tag:project,Values=udapeople" --filters "Name=instance-state-name,Values=running,pending" --query "Reservations[*].Instances[*].[PublicIpAddress]" --output text)
+            export API_URL=http://${BACKEND_IP}:3030
             echo "API_URL = ${API_URL}"
             if curl "${API_URL}/api/status" | grep "ok"
             then
