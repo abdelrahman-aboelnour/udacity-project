@@ -4,13 +4,13 @@
     src: /root/project/artifact.tar.gz
     dest: /home/ubuntu/
 
-# - name: stop app.
-  # become: true
-  # shell: pm2 stop default
-  # ignore_errors: yes
+- name: stop app.
+  become: true
+  shell: pm2 stop default
+  ignore_errors: yes
   
-# - name: Start the application using PM2
-  # become: true
-  # shell: |
-    # cd ./dist
-    # pm2 start main.js
+- name: Start the application using PM2
+  become: true
+  shell: |
+    cd ./dist
+    pm2 start main.js
