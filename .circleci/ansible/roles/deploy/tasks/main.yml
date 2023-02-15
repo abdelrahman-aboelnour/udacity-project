@@ -3,14 +3,16 @@
   unarchive:
     src: /root/project/artifact.tar.gz
     dest: /home/ubuntu/
+    
+- name: copy .env to dist
+  shell: |
+    cp /home/ubuntu/.env /home/ubuntu/dist/
 
 - name: stop app.
-  become: true
   shell: pm2 stop default
   ignore_errors: yes
   
 - name: Start the application using PM2
-  become: true
   shell: |
     cd ./dist
     pm2 start main.js

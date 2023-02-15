@@ -286,16 +286,16 @@ jobs:
         - run:
             name: Deploy backend
             command: |
-                export ENVIROMENT=production
-                export TYPEORM_CONNECTION=postgres
-                export TYPEORM_MIGRATIONS_DIR=./migrations
-                export TYPEORM_ENTITIES=./modules/domain/**/*.entity.{ts,.js}
-                export TYPEORM_MIGRATIONS=./migrations/*.ts
-                export TYPEORM_HOST=$TYPEORM_HOST
-                export TYPEORM_PORT=$TYPEORM_PORT
-                export TYPEORM_USERNAME=$TYPEORM_USERNAME
-                export TYPEORM_PASSWORD=$TYPEORM_PASSWORD
-                export TYPEORM_DATABASE=$TYPEORM_DATABASE
+                echo ENVIROMENT=production > backend/.env
+                echo TYPEORM_CONNECTION=postgres >> backend/.env
+                echo TYPEORM_MIGRATIONS_DIR=./migrations >> backend/.env
+                echo TYPEORM_ENTITIES=./modules/domain/**/*.entity.{ts,.js} >> backend/.env
+                echo TYPEORM_MIGRATIONS=./migrations/*.ts >> backend/.env
+                echo TYPEORM_HOST=$TYPEORM_HOST >> backend/.env
+                echo TYPEORM_PORT=$TYPEORM_PORT >> backend/.env
+                echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> backend/.env
+                echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> backend/.env
+                echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> backend/.env
                 cd backend
                 npm i
                 npm run build
