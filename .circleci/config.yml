@@ -414,9 +414,6 @@ jobs:
             unzip awscliv2.zip
             sudo ./aws/install
       - run:
-          name: 
-          command: |
-      - run:
           name: Get old stack workflow id and Remove old stacks and files
           command: |
             cat ~/OldWorkflowID.txt
