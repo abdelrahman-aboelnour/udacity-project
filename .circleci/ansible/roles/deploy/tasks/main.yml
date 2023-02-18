@@ -1,7 +1,7 @@
 
 - name: Extract artifact.tar.gz
   unarchive:
-    src: /root/project/artifact.tar.gz
+    src: artifact.tar.gz
     dest: /home/ubuntu/
     
 - name: copy .env to dist
