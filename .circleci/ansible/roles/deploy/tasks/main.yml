@@ -5,7 +5,7 @@
 
 - name: "Unarchive backend files"
   unarchive:
-    src: artifact.tar.gz
+    src: /root/project/.circleci/artifact.tar.gz
     dest: ~/backend-app
 
 - name: "Installing Node Dependencies"
@@ -23,8 +23,3 @@
   debug:
     msg: "{{ execute_node.stdout_lines }}"
     
-
-- name: "Configure pm2 to start as service"
-  become: true
-  shell: |
-    env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
