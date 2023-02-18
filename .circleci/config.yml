@@ -166,7 +166,7 @@ jobs:
             aws ec2 describe-instances --filters Name=tag:project,Values=udapeople Name=instance-state-name,Values=running,pending --query "Reservations[*].Instances[*].[PublicIpAddress]" --output text >> inventory.txt
             cat inventory.txt
       - persist_to_workspace:
-          root: ~/ 
+          root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
       - destroy-environment 
@@ -283,31 +283,26 @@ jobs:
                 cd .circleci/ansible
                 cat inventory.txt
         - run:
-            name: prepare for backend deploy
+            name: Deploy backend
             command: |
                 echo ENVIROMENT=production > backend/.env
                 echo TYPEORM_CONNECTION=postgres >> backend/.env
                 echo TYPEORM_MIGRATIONS_DIR=./migrations >> backend/.env
                 echo TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js} >> backend/.env
-                echo TYPEORM_MIGRATIONS=./migrations/*.ts >> backend/.env
+                echo TYPEORM_MIGRATIONS=./migrations/*{.ts,.js} >> backend/.env
                 echo TYPEORM_HOST=$TYPEORM_HOST >> backend/.env
                 echo TYPEORM_PORT=$TYPEORM_PORT >> backend/.env
                 echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> backend/.env
                 echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> backend/.env
                 echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> backend/.env
                 cd backend
+                npm i
                 npm run build
+                cd ..
+                # Zip the directory
                 tar -czf artifact.tar.gz dist/* package*
-                cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
-                
-                
-        - run:
-            name: Deploy backend
-            command: |
-                export TYPEORM_MIGRATIONS_DIR=./migrations
-                export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
-                export TYPEORM_MIGRATIONS=./migrations/*.ts
                 cd .circleci/ansible
+                echo "Contents  of the inventory.txt file is -------"
                 cat inventory.txt
                 ansible-playbook -i inventory.txt deploy-backend.yml
         
