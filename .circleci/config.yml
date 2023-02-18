@@ -294,7 +294,7 @@ jobs:
                 echo TYPEORM_PORT=$TYPEORM_PORT >> backend/.env
                 echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> backend/.env
                 echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> backend/.env
-                echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> backend/.envcd backend
+                echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> backend/.env
                 cd backend
                 npm run build
                 tar -czf artifact.tar.gz dist/* package*
