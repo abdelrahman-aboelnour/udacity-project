@@ -283,22 +283,28 @@ jobs:
                 cd .circleci/ansible
                 cat inventory.txt
         - run:
-          name: Package Backend
-          command: |
-            cd backend
-            npm run build
-            tar -czf artifact.tar.gz dist/* package*
-            cd ..
-            cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
-        - run:
-          name: Deploy backend
-          command: |
-            export TYPEORM_MIGRATIONS_DIR=./migrations
-            export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
-            export TYPEORM_MIGRATIONS=./migrations/*.ts
-            cd .circleci/ansible
-            cat inventory.txt
-            ansible-playbook -i inventory.txt deploy-backend.yml
+            name: Deploy backend
+            command: |
+                echo ENVIROMENT=production > backend/.env
+                echo TYPEORM_CONNECTION=postgres >> backend/.env
+                echo TYPEORM_MIGRATIONS_DIR=./migrations >> backend/.env
+                echo TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js} >> backend/.env
+                echo TYPEORM_MIGRATIONS=./migrations/*.ts >> backend/.env
+                echo TYPEORM_HOST=$TYPEORM_HOST >> backend/.env
+                echo TYPEORM_PORT=$TYPEORM_PORT >> backend/.env
+                echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> backend/.env
+                echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> backend/.env
+                echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> backend/.envcd backend
+                npm run build
+                tar -czf artifact.tar.gz dist/* package*
+                cd ..
+                cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+                export TYPEORM_MIGRATIONS_DIR=./migrations
+                export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
+                export TYPEORM_MIGRATIONS=./migrations/*.ts
+                cd .circleci/ansible
+                cat inventory.txt
+                ansible-playbook -i inventory.txt deploy-backend.yml
         
         - destroy-environment
         - revert-migrations
