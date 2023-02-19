@@ -248,6 +248,16 @@ jobs:
             cd backend
             npm install
             echo "........npm install........"
+            echo ENVIROMENT=production > .env
+            echo TYPEORM_CONNECTION=postgres >> .env
+            echo TYPEORM_MIGRATIONS_DIR=./migrations >> .env
+            echo TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js} >> .env
+            echo TYPEORM_MIGRATIONS=./migrations/*{.ts,.js} >> .env
+            echo TYPEORM_HOST=$TYPEORM_HOST >> .env
+            echo TYPEORM_PORT=$TYPEORM_PORT >> .env
+            echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> .env
+            echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> .env
+            echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> .env
             npm run migrations:revert
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
