@@ -1,12 +1,6 @@
 version: 2.1
 
 commands:
-  notify_on_failure: # this forl once job fail will send at the slack channel
-    steps:
-      - slack/notify:
-          event: fail
-          channel: udapeople-cicd
-          template: basic_fail_1
   
   install_awscli: # this command for installing AWS CLI
     description: Install AWS CLI v2
@@ -98,7 +92,6 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-deps
-      - notify_on_failure
 
   build-backend:
     docker:
@@ -116,7 +109,6 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-deps
-      - notify_on_failure
 
   test-frontend:
     docker:
@@ -131,7 +123,6 @@ jobs:
             cd frontend
             npm install 
             npm test
-      - notify_on_failure
 
   test-backend:
     docker:
@@ -146,7 +137,6 @@ jobs:
             cd backend
             npm install 
             npm test
-      - notify_on_failure
 
   scan-frontend:
     docker:
@@ -167,7 +157,6 @@ jobs:
             npm audit --audit-level=critical
             npm audit --audit-level=critical
             npm audit --audit-level=critical
-      - notify_on_failure
 
   scan-backend:
     docker:
@@ -188,7 +177,6 @@ jobs:
             npm audit --audit-level=critical
             npm audit --audit-level=critical
             npm audit --audit-level=critical
-      - notify_on_failure
 
   deploy-infrastructure:
     docker:
@@ -204,7 +192,6 @@ jobs:
               --tags project=udapeople \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
-      - notify_on_failure
               
       - run:
           name: Ensure front-end infrastructure exist
@@ -227,7 +214,6 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      - notify_on_failure
       - destroy-environment      
 
   configure-infrastructure:
@@ -247,7 +233,6 @@ jobs:
          cd .circleci/ansible
          cat inventory.txt
          ansible-playbook -i inventory.txt configure-server.yml
-    - notify_on_failure
     - destroy-environment
 
   
