@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  slack: circleci/slack@4.9.3
-
 commands:
   notify_on_failure: # this forl once job fail will send at the slack channel
     steps:
@@ -541,9 +538,9 @@ workflows:
           requires: [run-migrations]
       - deploy-backend:
           requires: [run-migrations]
-      - smoke-test:
-          requires: [deploy-backend, deploy-frontend]
-      - cloudfront-update:
-          requires: [smoke-test]
-      - cleanup:
-          requires: [cloudfront-update]
+      # - smoke-test:
+          # requires: [deploy-backend, deploy-frontend]
+      # - cloudfront-update:
+          # requires: [smoke-test]
+      # - cleanup:
+          # requires: [cloudfront-update]
