@@ -218,6 +218,7 @@ jobs:
                 export TYPEORM_USERNAME=$TYPEORM_USERNAME
                 export TYPEORM_PASSWORD=$TYPEORM_PASSWORD
                 export TYPEORM_DATABASE=$TYPEORM_DATABASE
+                cat env
                 cd backend
                 npm i
                 npm run migrations > migrations_dump.txt
@@ -297,16 +298,16 @@ jobs:
         - run:
             name: Deploy backend
             command: |
-                echo ENVIROMENT=production > backend/.env
-                echo TYPEORM_CONNECTION=postgres >> backend/.env
-                echo TYPEORM_MIGRATIONS_DIR=./migrations >> backend/.env
-                echo TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js} >> backend/.env
-                echo TYPEORM_MIGRATIONS=./migrations/*{.ts,.js} >> backend/.env
-                echo TYPEORM_HOST=$TYPEORM_HOST >> backend/.env
-                echo TYPEORM_PORT=$TYPEORM_PORT >> backend/.env
-                echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> backend/.env
-                echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> backend/.env
-                echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> backend/.env
+                echo ENVIROMENT=production > backend/dist/.env
+                echo TYPEORM_CONNECTION=postgres >> backend/dist/.env
+                echo TYPEORM_MIGRATIONS_DIR=./migrations >> backend/dist/.env
+                echo TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js} >> backend/dist/.env
+                echo TYPEORM_MIGRATIONS=./migrations/*{.ts,.js} >> backend/dist/.env
+                echo TYPEORM_HOST=$TYPEORM_HOST >> backend/dist/.env
+                echo TYPEORM_PORT=$TYPEORM_PORT >> backend/dist/.env
+                echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> backend/dist/.env
+                echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> backend/dist/.env
+                echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> backend/dist/.env
                 
                 export ENVIROMENT=production
                 export TYPEORM_CONNECTION=postgres
@@ -318,6 +319,9 @@ jobs:
                 export TYPEORM_USERNAME=$TYPEORM_USERNAME
                 export TYPEORM_PASSWORD=$TYPEORM_PASSWORD
                 export TYPEORM_DATABASE=$TYPEORM_DATABASE
+                
+                
+                cat env
                 
                 cd backend
                 npm i
