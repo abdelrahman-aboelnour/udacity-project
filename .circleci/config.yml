@@ -481,14 +481,6 @@ jobs:
               echo "------------------ Nothing to Delete/Can't Delete ------------------"  
             fi
             
-  notify_on_success:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - slack/notify:
-          event: pass
-          channel: udapeople-cicd
-          template: success_tagged_deployment_1
 
 
 workflows:
@@ -504,12 +496,6 @@ workflows:
           requires: [build-backend]
       - scan-frontend:
           requires: [build-frontend]
-      - notify_on_success:
-          requires:
-            - test-frontend
-            - test-backend
-            - scan-frontend
-            - scan-backend
       - deploy-infrastructure:
           requires: [test-frontend, test-backend, scan-frontend, scan-backend]
           filters:
