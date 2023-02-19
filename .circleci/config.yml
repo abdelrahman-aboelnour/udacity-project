@@ -301,7 +301,7 @@ jobs:
                 npm i
                 npm run build
                 # Zip the directory
-                tar -czf artifact.tar.gz dist/* package*
+                tar -czf artifact.tar.gz .
                 cd ..
                 cp backend/artifact.tar.gz .circleci
                 export TYPEORM_MIGRATIONS_DIR=./migrations
