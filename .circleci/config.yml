@@ -208,7 +208,6 @@ jobs:
       - run:
           name: Run migrations
           command: |
-<<<<<<< HEAD
                 export ENVIROMENT=production
                 export TYPEORM_CONNECTION=postgres
                 export TYPEORM_MIGRATIONS_DIR="./src/migrations"
@@ -223,15 +222,6 @@ jobs:
                 cd backend
                 npm i
                 npm run migrations > migrations_dump.txt
-                cat migrations_dump.txt
-=======
-            cd backend
-            npm install
-            echo "........npm install........"
-            npm run migrations:revert
-            npm run migrations > migrations_dump.txt
-            cat migrations_dump.txt
->>>>>>> parent of 2a25284 (edi)
       - run:
           name: Send migration status to kvdb.io OR memstash.io
           command: |   
