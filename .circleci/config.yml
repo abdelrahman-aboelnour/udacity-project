@@ -298,16 +298,6 @@ jobs:
         - run:
             name: Deploy backend
             command: |
-                echo ENVIROMENT=production > backend/dist/.env
-                echo TYPEORM_CONNECTION=postgres >> backend/dist/.env
-                echo TYPEORM_MIGRATIONS_DIR=./migrations >> backend/dist/.env
-                echo TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js} >> backend/dist/.env
-                echo TYPEORM_MIGRATIONS=./migrations/*{.ts,.js} >> backend/dist/.env
-                echo TYPEORM_HOST=$TYPEORM_HOST >> backend/dist/.env
-                echo TYPEORM_PORT=$TYPEORM_PORT >> backend/dist/.env
-                echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> backend/dist/.env
-                echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> backend/dist/.env
-                echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> backend/dist/.env
                 
                 export ENVIROMENT=production
                 export TYPEORM_CONNECTION=postgres
@@ -321,11 +311,23 @@ jobs:
                 export TYPEORM_DATABASE=$TYPEORM_DATABASE
                 
                 
-                cat env
+                env
                 
                 cd backend
                 npm i
                 npm run build
+                
+                echo ENVIROMENT=production > /dist/.env
+                echo TYPEORM_CONNECTION=postgres >> /dist/.env
+                echo TYPEORM_MIGRATIONS_DIR=./migrations >> /dist/.env
+                echo TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js} >> /dist/.env
+                echo TYPEORM_MIGRATIONS=./migrations/*{.ts,.js} >> /dist/.env
+                echo TYPEORM_HOST=$TYPEORM_HOST >> /dist/.env
+                echo TYPEORM_PORT=$TYPEORM_PORT >> /dist/.env
+                echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> /dist/.env
+                echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> /dist/.env
+                echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> /dist/.env
+                
                 # Zip the directory
                 tar -czf artifact.tar.gz .
                 cd ..
